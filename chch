@@ -1,0 +1,203 @@
+🖊️ Základy práce s terminálem
+cpp
+Copy
+Edit
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Zadejte cislo: ";
+    int x;
+    cin >> x;
+    cout << "Zadali jste: " << x << endl;
+    return 0;
+}
+cout = výpis na obrazovku
+
+cin = načtení vstupu z klávesnice
+
+🧠 Podmínky (if / else)
+cpp
+Copy
+Edit
+if (podminka) {
+    // kod
+} else if (dalsi_podminka) {
+    // kod
+} else {
+    // kod
+}
+Příklad:
+
+cpp
+Copy
+Edit
+int x;
+cin >> x;
+if (x > 0) {
+    cout << "Kladne cislo\n";
+} else if (x < 0) {
+    cout << "Zaporne cislo\n";
+} else {
+    cout << "Nula\n";
+}
+🔁 Cykly
+For
+cpp
+Copy
+Edit
+for (int i = 0; i < 5; i++) {
+    cout << i << endl;
+}
+While
+cpp
+Copy
+Edit
+int i = 0;
+while (i < 5) {
+    cout << i << endl;
+    i++;
+}
+Do-While
+cpp
+Copy
+Edit
+int i = 0;
+do {
+    cout << i << endl;
+    i++;
+} while (i < 5);
+🛠️ Funkce
+cpp
+Copy
+Edit
+// deklarace
+int secti(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int vysledek = secti(5, 3);
+    cout << vysledek; // 8
+    return 0;
+}
+Funkce může vracet hodnotu nebo být void (nic nevrací).
+
+📦 Struktury (struct)
+cpp
+Copy
+Edit
+struct Student {
+    string jmeno;
+    int vek;
+};
+
+int main() {
+    Student s;
+    s.jmeno = "Petr";
+    s.vek = 18;
+
+    cout << s.jmeno << " ma " << s.vek << " let.\n";
+    return 0;
+}
+🧹 Pole (arrays)
+cpp
+Copy
+Edit
+int cisla[5] = {1, 2, 3, 4, 5};
+
+for (int i = 0; i < 5; i++) {
+    cout << cisla[i] << endl;
+}
+📈 Vektory (std::vector)
+cpp
+Copy
+Edit
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> cisla = {1, 2, 3};
+    cisla.push_back(4); // pridani prvku
+
+    for (int i = 0; i < cisla.size(); i++) {
+        cout << cisla[i] << endl;
+    }
+    return 0;
+}
+📂 Práce se soubory (fstream)
+cpp
+Copy
+Edit
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Zapis do souboru
+    ofstream vystup("soubor.txt");
+    if (vystup.is_open()) {
+        vystup << "Hello World\n";
+        vystup.close();
+    }
+
+    // Cteni ze souboru
+    ifstream vstup("soubor.txt");
+    string radek;
+    if (vstup.is_open()) {
+        while (getline(vstup, radek)) {
+            cout << radek << endl;
+        }
+        vstup.close();
+    }
+
+    return 0;
+}
+🎛️ Jednoduché menu (switch)
+cpp
+Copy
+Edit
+#include <iostream>
+using namespace std;
+
+void vypisMenu() {
+    cout << "1. Pozdravit\n";
+    cout << "0. Konec\n";
+}
+
+int main() {
+    int volba;
+    do {
+        vypisMenu();
+        cout << "Zadejte volbu: ";
+        cin >> volba;
+
+        switch (volba) {
+            case 1:
+                cout << "Ahoj!\n";
+                break;
+            case 0:
+                cout << "Konec.\n";
+                break;
+            default:
+                cout << "Neplatna volba.\n";
+                break;
+        }
+    } while (volba != 0);
+
+    return 0;
+}
+
+⚡ Bonus: Ošetření vstupu
+Když uživatel zadá blbost (např. text místo čísla), musíš ošetřit cin:
+
+cpp
+Copy
+Edit
+int x;
+cin >> x;
+if (cin.fail()) {
+    cout << "Chyba vstupu!\n";
+    cin.clear(); // reset error flag
+    cin.ignore(10000, '\n'); // ignoruj zbytek radku
+}
